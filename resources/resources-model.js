@@ -16,7 +16,7 @@ module.exports = {
   
   function addResource(newResouce) {
     return db("Resources")
-      .insert(newResouce, id)
+      .insert(newResouce)
       .then((ids) => {
         const id = ids[0];
         return findResourceById(id);

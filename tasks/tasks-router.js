@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
     const newTaskData = req.body
     Tasks.addTask(newTaskData)
     .then(newTask => {
-        if(!newTask.description){
+        if(!newTask.description || !newTask.project_id){
             res.status(400).json({ message: "Please provide a name for the task." })
         } else {
             res.status(201).json(newTask)
