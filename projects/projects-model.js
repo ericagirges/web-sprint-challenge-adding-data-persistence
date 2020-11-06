@@ -4,12 +4,6 @@ module.exports = {
   findAllProjects,
   addProject,
   findProjectById,
-  findAllResources,
-  addResource,
-  findResourceById,
-  findAllTasks,
-  addTask,
-  findTaskById,
 };
 
 function findAllProjects() {
@@ -29,38 +23,3 @@ function addProject(newProject) {
     });
 }
 
-function findAllResources() {
-  return db("Resources");
-}
-
-function findResourceById(id) {
-  return db("Resources").where({ id }).first();
-}
-
-function addResource(newResouce) {
-  return db("Resources")
-    .insert(newResouce, id)
-    .then((ids) => {
-      const id = ids[0];
-      return findResourceById(id);
-    });
-}
-
-function findAllTasks() {
-  return db("Tasks as t")
-    .join("Projects as p", "t.projects_id", "=", "p.id")
-    .select("t.id", "t.description", "t.notes", "p.name", "p.description");
-}
-
-function findTaskById(id) {
-  return db("Tasks").where({ id }).first();
-}
-
-function addTask(newTask) {
-  return db("Tasks")
-    .insert(newTask, id)
-    .then((ids) => {
-      const id = ids[0];
-      return findTaskById(id);
-    });
-}
